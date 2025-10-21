@@ -12,7 +12,7 @@ const UrlShortener = ({ compact = false }) => {
     try {
       const response = await apiClient.post("/short-url", { bigurl: URL, email });
       if (response && response.data.shorturl) {
-        setShortURL(response.data.shorturl);
+        setShortURL(`${import.meta.env.VITE_BASE_URL}small/${item.shortid}`);
         setCopied(false);
       }
     } catch (err) {
