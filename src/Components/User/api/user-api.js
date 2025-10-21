@@ -5,6 +5,7 @@ export const registerApiCall=async (formData)=>{
         return response;
     }catch(err){
         console.log("Register Api Call Fails", err);
+        console.log(("Message", err.response?.data||err.message));
         throw err;
     }
 }
