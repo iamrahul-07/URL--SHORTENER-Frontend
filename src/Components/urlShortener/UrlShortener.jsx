@@ -11,8 +11,9 @@ const UrlShortener = ({ compact = false }) => {
     const email=localStorage.getItem("email");
     try {
       const response = await apiClient.post("/short-url", { bigurl: URL, email });
-      if (response && response.data.shorturl) {
-        setShortURL(response.data.shorturl);
+      if (response && response.data.shortid) {
+        const fullShortUrl=`${import.meta.env.VITE_BASE_URL}small/${response.data.shortid}`;
+        setShortURL(fullShortUrl);
         setCopied(false);
       }
     } catch (err) {
