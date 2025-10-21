@@ -14,24 +14,24 @@ const DashboardPage = ({ userName = "User" }) => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-r from-blue-50 to-blue-100 overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-50 to-blue-100">
       {/* Header */}
-      <header className="bg-blue-600 text-white p-4 text-xl font-semibold shadow-md flex justify-between items-center">
-        <span>Welcome, {userName}!</span>
+      <header className="bg-blue-600 text-white p-4 text-lg sm:text-xl font-semibold shadow-md flex justify-between items-center">
+        <span className="truncate">Welcome, {userName}!</span>
         <button
           onClick={handleLogout}
-          className="bg-white text-blue-600 font-bold px-3 py-1.5 rounded-lg hover:bg-gray-200 transition duration-300 cursor-pointer"
+          className="bg-white text-blue-600 font-bold px-3 py-1.5 rounded-lg hover:bg-gray-200 transition duration-300 text-sm sm:text-base"
         >
           Logout
         </button>
       </header>
 
       {/* Main Layout */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 flex-col sm:flex-row overflow-hidden">
         {/* Sidebar */}
-        <nav className="w-64 bg-white/50 backdrop-blur-md p-6 flex flex-col gap-4 border-r border-blue-200 shadow-md">
+        <nav className="w-full sm:w-64 bg-white/50 backdrop-blur-md p-4 sm:p-6 flex sm:flex-col gap-2 sm:gap-4 border-b sm:border-b-0 sm:border-r border-blue-200 shadow-md overflow-x-auto">
           <button
-            className={`text-left p-3 rounded-lg font-medium transition-all ${
+            className={`text-left w-full p-2 sm:p-3 rounded-lg font-medium transition-all text-sm sm:text-base ${
               activePage === "shortener"
                 ? "bg-blue-600 text-white shadow-md"
                 : "hover:bg-blue-50 text-gray-800"
@@ -42,7 +42,7 @@ const DashboardPage = ({ userName = "User" }) => {
           </button>
 
           <button
-            className={`text-left p-3 rounded-lg font-medium transition-all ${
+            className={`text-left w-full p-2 sm:p-3 rounded-lg font-medium transition-all text-sm sm:text-base ${
               activePage === "allUrls"
                 ? "bg-blue-600 text-white shadow-md"
                 : "hover:bg-blue-50 text-gray-800"
@@ -54,8 +54,8 @@ const DashboardPage = ({ userName = "User" }) => {
         </nav>
 
         {/* Main Content */}
-        <main className="flex-1 flex items-center justify-center p-4">
-          <div className="w-full max-w-xl">
+        <main className="flex-1 flex items-start sm:items-center justify-center p-4 overflow-auto">
+          <div className="w-full max-w-3xl">
             {activePage === "shortener" && <UrlShortener compact={false} />}
             {activePage === "allUrls" && <AllUrlsPage />}
           </div>
