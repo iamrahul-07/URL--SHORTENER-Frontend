@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { apiClient } from "../../shared/services/api-client.js";
 
+const BASE_URL=import.meta.env.VITE_BASE_URL;
+
 const UrlShortener = ({ compact = false }) => {
   const url = useRef();
   const [shortUrl, setShortURL] = useState("");
@@ -11,8 +13,10 @@ const UrlShortener = ({ compact = false }) => {
     const email=localStorage.getItem("email");
     try {
       const response = await apiClient.post("/short-url", { bigurl: URL, email });
-      if (response && response.data.shorturl) {
-        setShortURL(`${import.meta.env.VITE_BASE_URL}small/${item.shortid}`);
+      if (response && response.data.shortid) {
+        console.log(response.data.shortid);
+        const fullShortUrl=`${BASE_URL}small/${response.data.shortid}`;
+        setShortURL(fullShortUrl);
         setCopied(false);
       }
     } catch (err) {
